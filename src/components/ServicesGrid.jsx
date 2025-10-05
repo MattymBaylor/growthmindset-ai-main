@@ -86,8 +86,8 @@ const ServicesGrid = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => navigate(service.link)}
             >
-              {/* Compact Image Section */}
-              <div className="relative overflow-hidden h-32 sm:h-40 lg:h-44 xl:h-48 flex-shrink-0">
+              {/* Image Section - Larger to match website */}
+              <div className="relative overflow-hidden h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 flex-shrink-0">
                 {service.badge && (
                   <div className="absolute top-2 right-2 z-10 bg-warning text-warning-foreground px-2 py-0.5 rounded-full text-xs font-semibold shadow-md">
                     {service.badge}
@@ -96,9 +96,9 @@ const ServicesGrid = () => {
                 <img 
                   src={service.image} 
                   alt={service.title}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-smooth"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-smooth"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-transparent" />
               </div>
               
               {/* Compact Header */}
