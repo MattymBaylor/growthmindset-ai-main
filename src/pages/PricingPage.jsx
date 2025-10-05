@@ -1,5 +1,5 @@
 // src/pages/PricingPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,64 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Check, X, Zap, Star, TrendingUp, Sparkles, ChevronRight, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+
+// Square Payment Button Component
+const SquarePaymentButton = ({ paymentLink = "https://square.link/u/Ng4xoLoC", buttonText = "Get Started", className = "", variant = "default", size = "lg" }) => {
+  useEffect(() => {
+    const showCheckoutWindow = (e) => {
+      e.preventDefault();
+      const button = e.currentTarget;
+      const url = button.getAttribute('data-url');
+      if (!url) return;
+
+      const title = 'Square Payment';
+      const topWindow = window.top || window;
+      const dualScreenLeft = topWindow.screenLeft ?? topWindow.screenX;
+      const dualScreenTop = topWindow.screenTop ?? topWindow.screenY;
+      const width = topWindow.innerWidth || document.documentElement.clientWidth || screen.width;
+      const height = topWindow.innerHeight || document.documentElement.clientHeight || screen.height;
+      const h = height * 0.75;
+      const w = 500;
+      const systemZoom = width / topWindow.screen.availWidth;
+      const left = (width - w) / 2 / systemZoom + dualScreenLeft;
+      const top = (height - h) / 2 / systemZoom + dualScreenTop;
+      
+      const newWindow = window.open(
+        url, 
+        title, 
+        `scrollbars=yes, width=${w / systemZoom}, height=${h / systemZoom}, top=${top}, left=${left}`
+      );
+      
+      if (newWindow && window.focus) newWindow.focus();
+    };
+
+    const buttons = document.querySelectorAll('.square-checkout-button');
+    buttons.forEach(button => {
+      button.addEventListener('click', showCheckoutWindow);
+    });
+
+    return () => {
+      buttons.forEach(button => {
+        button.removeEventListener('click', showCheckoutWindow);
+      });
+    };
+  }, []);
+
+  return (
+    <Button
+      className={cn("square-checkout-button w-full", className)}
+      data-url={paymentLink}
+      variant={variant}
+      size={size}
+      asChild
+    >
+      <a href={paymentLink}>
+        {buttonText}
+        <ChevronRight className="w-4 h-4 ml-2" />
+      </a>
+    </Button>
+  );
+};
 
 const PricingPage = () => {
   const { user } = useAuth();
@@ -22,6 +80,7 @@ const PricingPage = () => {
       description: 'Perfect for small businesses getting started with AI automation',
       monthlyPrice: 299,
       yearlyPrice: 2990,
+      paymentLink: 'https://square.link/u/Ng4xoLoC', // Update with actual Square link
       features: [
         { name: 'Voice AI Agent (100 calls/month)', included: true },
         { name: 'Basic Recruitment Screening', included: true },
@@ -41,6 +100,7 @@ const PricingPage = () => {
       description: 'Ideal for growing companies ready to scale with AI',
       monthlyPrice: 799,
       yearlyPrice: 7990,
+      paymentLink: 'https://square.link/u/Ng4xoLoC', // Update with actual Square link
       badge: 'Most Popular',
       features: [
         { name: 'Voice AI Agents (500 calls/month)', included: true },
@@ -74,19 +134,15 @@ const PricingPage = () => {
       ],
       cta: 'Contact Sales',
       highlighted: false,
+      isCustom: true,
     },
   ];
 
   const handleSelectPlan = (plan) => {
-    if (plan.id === 'enterprise') {
+    if (plan.isCustom) {
       navigate('/contact?plan=enterprise');
-    } else if (user) {
-      // If user is logged in, go to checkout
-      navigate(`/checkout?plan=${plan.id}&billing=${billingCycle}`);
-    } else {
-      // If not logged in, go to signup with plan info
-      navigate(`/signup?plan=${plan.id}&billing=${billingCycle}`);
     }
+    // Square payment will be handled by the button click
   };
 
   const calculateSavings = (monthlyPrice) => {
@@ -208,15 +264,24 @@ const PricingPage = () => {
               </CardContent>
               
               <CardFooter className="pt-6">
-                <Button 
-                  className="w-full" 
-                  variant={plan.highlighted ? "default" : "outline"}
-                  size="lg"
-                  onClick={() => handleSelectPlan(plan)}
-                >
-                  {plan.cta}
-                  <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
+                {plan.isCustom ? (
+                  <Button 
+                    className="w-full" 
+                    variant={plan.highlighted ? "default" : "outline"}
+                    size="lg"
+                    onClick={() => handleSelectPlan(plan)}
+                  >
+                    {plan.cta}
+                    <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
+                ) : (
+                  <SquarePaymentButton
+                    paymentLink={plan.paymentLink}
+                    buttonText={plan.cta}
+                    variant={plan.highlighted ? "default" : "outline"}
+                    size="lg"
+                  />
+                )}
               </CardFooter>
             </Card>
           </motion.div>
@@ -275,7 +340,7 @@ const PricingPage = () => {
           <div className="border rounded-lg p-6">
             <h3 className="font-semibold mb-2">What payment methods do you accept?</h3>
             <p className="text-sm text-muted-foreground">
-              We accept all major credit cards, debit cards, and ACH transfers for Enterprise plans.
+              We accept all major credit cards, debit cards, and digital wallets through Square.
             </p>
           </div>
           <div className="border rounded-lg p-6">
