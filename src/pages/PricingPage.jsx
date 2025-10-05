@@ -5,7 +5,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Check, X, Zap, Star, TrendingUp, Sparkles, ChevronRight, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -122,37 +121,50 @@ const PricingPage = () => {
         </p>
       </motion.div>
 
-      {/* Billing Toggle */}
+      {/* Billing Toggle - Simple Button Version */}
       <div className="flex justify-center mb-12">
-        <Tabs value={billingCycle} onValueChange={setBillingCycle} className="w-auto">
-          <TabsList className="grid grid-cols-2 w-[300px]">
-            <TabsTrigger value="monthly">Monthly</TabsTrigger>
-            <TabsTrigger value="yearly" className="relative">
-              Yearly
-              <Badge className="absolute -top-8 -right-2 bg-green-500 text-white">
-                Save 17%
-              </Badge>
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="inline-flex items-center bg-card border border-border rounded-lg p-1">
+          <button
+            onClick={() => setBillingCycle('monthly')}
+            className={cn(
+              "px-6 py-2 rounded-md text-sm font-medium transition-colors",
+              billingCycle === 'monthly' 
+                ? "bg-accent text-accent-foreground" 
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            Monthly
+          </button>
+          <button
+            onClick={() => setBillingCycle('yearly')}
+            className={cn(
+              "px-6 py-2 rounded-md text-sm font-medium transition-colors relative",
+              billingCycle === 'yearly' 
+                ? "bg-accent text-accent-foreground" 
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            Yearly
+            <Badge className="absolute -top-8 -right-2 bg-green-500 text-white text-xs">
+              Save 17%
+            </Badge>
+          </button>
+        </div>
       </div>
 
       {/* Pricing Cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
         {plans.map((plan, index) => (
           <motion.div
             key={plan.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={cn(
-              "relative",
-              plan.highlighted && "md:-mt-4"
-            )}
+            className="relative h-full"
           >
             <Card className={cn(
               "h-full flex flex-col",
-              plan.highlighted && "border-accent shadow-2xl shadow-accent/20 scale-105"
+              plan.highlighted && "border-accent shadow-2xl shadow-accent/20"
             )}>
               {plan.badge && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
