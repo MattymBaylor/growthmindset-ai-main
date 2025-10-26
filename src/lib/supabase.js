@@ -6,15 +6,27 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'YOUR_SUPABASE_URL';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase credentials not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your .env file');
+  console.warn(
+    'Supabase credentials not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your .env file'
+  );
 }
 
+// Safari fix: check if localStorage is accessible (it may throw in Safari Private mode)
+let authStorage;
+try {
+  authStorage = window.localStorage;
+} catch (error) {
+  authStorage = undefined;
+}
+
+// Initialize Supabase client with the detected storage
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
+    storage: authStorage,
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: true
-  }
+    detectSessionInUrl: true,
+  },
 });
 
 // Auth helper functions
@@ -43,7 +55,9 @@ export const signOut = async () => {
 };
 
 export const getCurrentUser = async () => {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return user;
 };
 
@@ -57,20 +71,17 @@ export const resetPassword = async (email) => {
 // Database helper functions
 export const fetchData = async (table, filters = {}) => {
   let query = supabase.from(table).select('*');
-  
-  Object.keys(filters).forEach(key => {
+
+  Object.keys(filters).forEach((key) => {
     query = query.eq(key, filters[key]);
   });
-  
+
   const { data, error } = await query;
   return { data, error };
 };
 
 export const insertData = async (table, data) => {
-  const { data: result, error } = await supabase
-    .from(table)
-    .insert(data)
-    .select();
+  const { data: result, error } = await supabase.from(table).insert(data).select();
   return { data: result, error };
 };
 
@@ -84,10 +95,7 @@ export const updateData = async (table, id, updates) => {
 };
 
 export const deleteData = async (table, id) => {
-  const { error } = await supabase
-    .from(table)
-    .delete()
-    .eq('id', id);
+  const { error } = await supabase.from(table).delete().eq('id', id);
   return { error };
 };
 
@@ -95,12 +103,7 @@ export const deleteData = async (table, id) => {
 export const subscribeToTable = (table, callback) => {
   const subscription = supabase
     .channel(`public:${table}`)
-    .on(
-      'postgres_changes',
-      { event: '*', schema: 'public', table: table },
-      callback
-    )
+    .on('postgres_changes', { event: '*', schema: 'public', table: table }, callback)
     .subscribe();
-  
   return subscription;
 };
