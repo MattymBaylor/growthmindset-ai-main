@@ -153,7 +153,7 @@ const PricingPage = () => {
       </div>
 
       {/* Pricing Cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
         {plans.map((plan, index) => (
           <motion.div
             key={plan.id}
