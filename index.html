@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
-
-    <!-- LocalStorage fallback to prevent Safari private-mode SecurityError -->
-<script>
-  (function () {
-    try {
-      // Attempt a test read to see if localStorage is usable.
-      localStorage.getItem('__test__');
-    } catch (e) {
-      // If it throws, replace window.localStorage with a harmless stub.
-      window.localStorage = {
-        getItem: function () { return null; },
-        setItem: function () {},
-        removeItem: function () {},
-        clear: function () {}
-      };
-    }
-  })();
-</script>
-
+    <script>
+      // LocalStorage fallback to prevent Safari private-mode SecurityError
+      (function() {
+        try {
+          // Attempt a test read to see if localStorage is usable.
+          localStorage.getItem('__test__');
+        } catch (e) {
+          // If it throws, replace window.localStorage with a harmless stub.
+          window.localStorage = {
+            getItem: function() { return null; },
+            setItem: function() {},
+            removeItem: function() {},
+            clear: function() {}
+          };
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Primary Meta Tags -->
@@ -50,14 +47,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
     
-   <!-- Favicon variants unified to one SVG to avoid 404s -->
-<link rel="apple-touch-icon" sizes="180x180" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon.svg">
-<link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon.svg">
-<link rel="mask-icon" href="/favicon.svg" color="#0891b2">
-<meta name="msapplication-TileColor" content="#0891b2">
-<meta name="theme-color" content="#0a0e1a">
-
+    <meta name="msapplication-TileColor" content="#0891b2">
+    <meta name="theme-color" content="#0a0e1a">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,27 +60,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Growth Mindset AI",
-      "applicationCategory": "BusinessApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "description": "AI-powered business automation platform offering voice agents, recruitment systems, financial automation, and more.",
-      "url": "https://growthmindset.ai",
-      "author": {
-        "@type": "Organization",
-        "name": "Growth Mindset AI",
-        "url": "https://growthmindset.ai"
-      }
-    }
-    </script>
   </body>
 </html>
