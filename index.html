@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
+
+    <!-- LocalStorage fallback to prevent Safari private-mode SecurityError -->
+<script>
+  (function () {
+    try {
+      // Attempt a test read to see if localStorage is usable.
+      localStorage.getItem('__test__');
+    } catch (e) {
+      // If it throws, replace window.localStorage with a harmless stub.
+      window.localStorage = {
+        getItem: function () { return null; },
+        setItem: function () {},
+        removeItem: function () {},
+        clear: function () {}
+      };
+    }
+  })();
+</script>
+
     <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
