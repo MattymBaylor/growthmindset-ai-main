@@ -59,7 +59,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
+            <Link className="flex items-center space-x-2 mb-4" to="/">
               <Sparkles className="h-6 w-6 text-accent" />
               <span className="text-xl font-bold">growthmindset.ai</span>
             </Link>
@@ -68,14 +68,14 @@ const Footer = () => {
             </p>
             
             <div className="space-y-2">
-              <a 
+              <a
                 href="mailto:support@growthmindset.ai"
                 className="flex items-center text-sm text-muted-foreground hover:text-accent transition-colors"
               >
                 <Mail className="h-4 w-4 mr-2" />
                 support@growthmindset.ai
               </a>
-              <a 
+              <a
                 href="tel:+1-555-123-4567"
                 className="flex items-center text-sm text-muted-foreground hover:text-accent transition-colors"
               >
@@ -114,12 +114,12 @@ const Footer = () => {
           <div className="text-sm text-muted-foreground">
             © {currentYear} Growth Mindset AI. All rights reserved.
           </div>
-
+          
           <div className="flex items-center space-x-4">
             {socialLinks.map((social) => {
               const Icon = social.icon;
               return (
-                
+                <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
