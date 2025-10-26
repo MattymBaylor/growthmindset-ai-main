@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -124,7 +123,7 @@ const Footer = () => {
                   key={social.label}
                   href={social.href}
                   target="_blank"
-                  <a rel="noopener noreferrer"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-accent transition-colors"
                   aria-label={social.label}
                 >
@@ -137,7 +136,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-border/40">
           <div className="flex flex-wrap gap-4 justify-center text-xs text-muted-foreground">
-            <span className="flex items-center gap-1">United States</span>
+            <span>United States</span>
             <span>|</span>
             <span>SOC 2 Type II Certified</span>
             <span>|</span>
