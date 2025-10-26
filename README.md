@@ -1,6 +1,6 @@
 # Growth Mindset AI - Business Automation Platform
 
-A comprehensive AI-powered business automation platform built with React, Vite, and Supabase.
+A comprehensive AI-powered business automation platform built with React, Vite, and Supabase. 
 
 ## 🚀 Features
 
