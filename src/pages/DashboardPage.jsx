@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+// import { Progress } from '@/components/ui/progress';
 import { 
   Phone, 
   Users, 
@@ -184,7 +184,7 @@ const DashboardPage = () => {
                     {stat.change}
                   </Badge>
                 </div>
-                <Progress value={75} className="mt-3 h-1" />
+                {/* <Progress value={75} className="mt-3 h-1" /> */}
               </CardContent>
             </Card>
           </motion.div>
