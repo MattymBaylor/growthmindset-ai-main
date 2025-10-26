@@ -1,15 +1,13 @@
-// Replace document 16's App.jsx with proper routing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@/contexts/AuthContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProtectedRoute from '@/components/ProtectedRoute';
-
 // Import all pages
 import HomePage from '@/pages/HomePage';
 import LoginPage from '@/pages/auth/LoginPage';
 import SignupPage from '@/pages/auth/SignupPage';
-import DashboardPage from '@/pages/DashboardPage';
+// import DashboardPage from '@/pages/DashboardPage';
 import PricingPage from '@/pages/PricingPage';
 // ... etc
 
@@ -23,9 +21,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/dashboard" element={
+          {/* <Route path="/dashboard" element={
             <ProtectedRoute><DashboardPage /></ProtectedRoute>
-          } />
+          } /> */}
           {/* Add all other routes */}
         </Routes>
         <Footer />
@@ -33,3 +31,5 @@ function App() {
     </AuthProvider>
   );
 }
+
+export default App;
