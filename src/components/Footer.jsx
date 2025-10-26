@@ -124,7 +124,7 @@ const Footer = () => {
                   key={social.label}
                   href={social.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  <a rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-accent transition-colors"
                   aria-label={social.label}
                 >
