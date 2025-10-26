@@ -1,0 +1,17 @@
+name: Check Links
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check links in repository
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress '**/*.md' '**/*.html'
