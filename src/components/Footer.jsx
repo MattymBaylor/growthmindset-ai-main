@@ -1,7 +1,6 @@
 // src/components/Footer.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { Separator } from '@/components/ui/separator';
 import { 
   Sparkles, 
   Mail, 
@@ -58,10 +57,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-background border-t border-border/40">
-      {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-          {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
               <Sparkles className="h-6 w-6 text-accent" />
@@ -71,7 +68,6 @@ const Footer = () => {
               Transforming businesses with intelligent AI automation solutions.
             </p>
             
-            {/* Contact Info */}
             <div className="space-y-2">
               <a 
                 href="mailto:support@growthmindset.ai"
@@ -94,7 +90,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="font-semibold text-sm mb-4">{category}</h3>
@@ -116,14 +111,11 @@ const Footer = () => {
 
         <hr className="my-8 border-border/40" />
 
-        {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          {/* Copyright */}
           <div className="text-sm text-muted-foreground">
             © {currentYear} Growth Mindset AI. All rights reserved.
           </div>
 
-          {/* Social Links */}
           <div className="flex items-center space-x-4">
             {socialLinks.map((social) => {
               const Icon = social.icon;
@@ -143,12 +135,9 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Additional Info */}
         <div className="mt-8 pt-8 border-t border-border/40">
           <div className="flex flex-wrap gap-4 justify-center text-xs text-muted-foreground">
-            <span className="flex items-center gap-1">
-              🇺🇸 United States
-            </span>
+            <span className="flex items-center gap-1">United States</span>
             <span>|</span>
             <span>SOC 2 Type II Certified</span>
             <span>|</span>
