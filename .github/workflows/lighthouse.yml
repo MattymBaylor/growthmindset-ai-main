@@ -1,0 +1,19 @@
+name: Lighthouse CI
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Run Lighthouse on production URL
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: "https://growthmindset-ai-new.vercel.app"
+          uploadArtifacts: true
+          temporaryPublicStorage: true
