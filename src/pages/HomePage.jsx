@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomePage = () => {
   return (
-    <div style={{ minHeight: '100vh', padding: '40px 20px', background: '#0a0a0a' }}>
+    <main style={{ minHeight: '100vh', padding: '40px 20px', background: '#0a0a0a' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
         <h1 style={{ fontSize: '60px', fontWeight: 'bold', color: 'white', marginBottom: '20px' }}>
           Automate Your Business With Intelligent AI
@@ -41,7 +41,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
