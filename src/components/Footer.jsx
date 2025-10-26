@@ -1,7 +1,7 @@
 // src/components/Footer.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Separator } from '@/components/ui/separator';
+// import { Separator } from '@/components/ui/separator';
 import { 
   Sparkles, 
   Mail, 
@@ -114,7 +114,7 @@ const Footer = () => {
           ))}
         </div>
 
-        <Separator className="my-8" />
+        <hr className="my-8 border-border/40" />
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -128,7 +128,7 @@ const Footer = () => {
             {socialLinks.map((social) => {
               const Icon = social.icon;
               return (
-                <a
+                
                   key={social.label}
                   href={social.href}
                   target="_blank"
