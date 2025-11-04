@@ -40,3 +40,9 @@ export const signIn = async (email, password) => {
   });
   return { data, error };
 };
+
+export const getCurrentUser = async () => {
+  const { data: { user }, error } = await supabase.auth.getUser();
+  if (error) throw error;
+  return user;
+};

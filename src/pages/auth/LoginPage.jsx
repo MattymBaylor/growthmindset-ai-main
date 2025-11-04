@@ -12,12 +12,12 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    const { data, error } = await supabase.auth.signInWithPassword({
+
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    
+
     if (error) {
       setMessage('Error: ' + error.message);
     } else {
@@ -57,7 +57,7 @@ const LoginPage = () => {
         </form>
         {message && <p className="mt-4 text-center text-red-400">{message}</p>}
         <p className="mt-4 text-center text-gray-400">
-          Don't have an account? <a href="/signup" className="text-blue-400">Sign Up</a>
+          Don&apos;t have an account? <a href="/signup" className="text-blue-400">Sign Up</a>
         </p>
       </div>
     </div>

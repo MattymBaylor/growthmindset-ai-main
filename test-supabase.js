@@ -12,7 +12,7 @@ async function testConnection() {
   try {
     // Test 1: Basic connection
     console.log('1️⃣ Testing basic connection...');
-    const { data: healthCheck, error: healthError } = await supabase
+    const { error: healthError } = await supabase
       .from('profiles')
       .select('count', { count: 'exact', head: true });
     
@@ -24,7 +24,7 @@ async function testConnection() {
     
     // Test 2: Auth functionality
     console.log('2️⃣ Testing authentication...');
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    const { data: { user } } = await supabase.auth.getUser();
     
     if (!user) {
       console.log('✅ Auth is working (no user logged in)\n');
